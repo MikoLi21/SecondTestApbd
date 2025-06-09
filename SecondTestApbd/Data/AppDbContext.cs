@@ -42,5 +42,31 @@ public class AppDbContext : DbContext
             .HasOne(tr => tr.Race)
             .WithMany(r => r.TrackRaces)
             .HasForeignKey(tr => tr.RaceId);
+        modelBuilder.Entity<Racer>().HasData(
+            new Racer { RacerId = 1, FirstName = "Lewis", LastName = "Hamilton" },
+            new Racer { RacerId = 2, FirstName = "Charles", LastName = "Leclerc" }
+        );
+
+        modelBuilder.Entity<Race>().HasData(
+            new Race { RaceId = 1, Name = "British Grand Prix", Location = "Silverstone, UK", Date = new DateTime(2025, 7, 14) },
+            new Race { RaceId = 2, Name = "Monaco Grand Prix", Location = "Monte Carlo, Monaco", Date = new DateTime(2025, 5, 25) }
+        );
+
+        modelBuilder.Entity<Track>().HasData(
+            new Track { TrackId = 1, Name = "Silverstone Circuit", LengthInKm = 5.89m },
+            new Track { TrackId = 2, Name = "Monaco Circuit", LengthInKm = 3.34m }
+        );
+
+        modelBuilder.Entity<TrackRace>().HasData(
+            new TrackRace { TrackRaceId = 1, TrackId = 1, RaceId = 1, Laps = 52, BestTimeInSeconds = 5400 },
+            new TrackRace { TrackRaceId = 2, TrackId = 2, RaceId = 2, Laps = 78, BestTimeInSeconds = 6200 }
+        );
+
+        modelBuilder.Entity<RaceParticipation>().HasData(
+            new RaceParticipation { TrackRaceId = 1, RacerId = 1, FinishTimeInSeconds = 5460, Position = 1 },
+            new RaceParticipation { TrackRaceId = 2, RacerId = 1, FinishTimeInSeconds = 6300, Position = 2 }
+        );
     }
 }
+
+    
