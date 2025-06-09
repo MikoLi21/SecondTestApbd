@@ -30,7 +30,7 @@ public class RacersController : ControllerBase
 
         if (racer == null)
             return NotFound();
-
+        
         var result = new RacerParticipationDto
         {
             RacerId = racer.RacerId,
